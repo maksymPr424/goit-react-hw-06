@@ -28,18 +28,9 @@ function App() {
     });
   };
 
-  const searchFunc = (fullName) => {
-    setSearch(fullName);
-    fullName === ""
-      ? setContact(contact)
-      : setContact((prevList) => {
-          return prevList.filter(({ name }) => {
-            const nameContact = name.toLowerCase();
-            const searchContactName = fullName.toLowerCase();
-            return nameContact.includes(searchContactName);
-          });
-        });
-  };
+  const visibleContact = contact.filter(({name}) =>
+    name.toLowerCase().includes(search.toLowerCase())
+  );
 
   const addContact = (newContact) => {
     setContact((prevContact) => [...prevContact, newContact]);
@@ -49,8 +40,8 @@ function App() {
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
       <ContactForm values={contact} onAdd={addContact} />
-      <SearchBox value={search} onSearch={searchFunc} />
-      <ContactList contacts={contact} onDel={delContact} />
+      <SearchBox value={search} onSearch={setSearch} />
+      <ContactList contacts={visibleContact} onDel={delContact} />
     </div>
   );
 }
