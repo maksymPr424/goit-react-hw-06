@@ -19,7 +19,7 @@ const contactsSlice = createSlice({
       },
     },
     delateContact({ items }, { payload }) {
-      const id = items.filter(({ id }) => id === payload);
+      const id = items.findIndex(({ id }) => id === payload);
       items.splice(id, 1);
     },
   },
