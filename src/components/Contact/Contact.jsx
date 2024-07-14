@@ -1,10 +1,13 @@
 import css from "./Contact.module.css";
 import { PiPhoneCallFill } from "react-icons/pi";
 import { BsPeopleFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { delateContact } from "../../redux/contactsSlice";
 
-export default function Contact({ name, number, onDel, id }) {
+export default function Contact({ name, number, id }) {
+  const dispatch = useDispatch();
   const del = () => {
-    onDel(id);
+    dispatch(delateContact(id));
   };
 
   return (
